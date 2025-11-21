@@ -656,9 +656,24 @@ async function inicializarBaseDatos() {
       logger.log('Columna userId en ventas ya existe o error en migración:', e.message);
     }
 
-    // NO crear usuario por defecto automáticamente
-    // Los usuarios deben ser creados manualmente o a través de la API
-    // Esto evita conflictos con usuarios personalizados como "GOD"
+    // Crear usuario admin por defecto SOLO si no hay usuarios en la base de datos
+    // Esto permite que el sistema funcione desde el primer inicio
+    const totalUsuarios = await dbGet('SELECT COUNT(*) as count FROM usuarios');
+    if ((totalUsuarios?.count || 0) === 0) {
+      logger.log('📝 No hay usuarios en la base de datos. Creando usuario admin por defecto...');
+      const hashedPassword = await bcrypt.hash('admin123', 10);
+      // Crear admin con ID 1
+      await dbRun(
+        'INSERT INTO usuarios (id, username, password, role) VALUES (?, ?, ?, ?)',
+        [1, 'admin', hashedPassword, 'admin']
+      );
+      logger.log('✅ Usuario admin por defecto creado:');
+      logger.log('   Usuario: admin');
+      logger.log('   Contraseña: admin123');
+      logger.log('   ⚠️  IMPORTANTE: Cambia la contraseña después del primer login');
+    } else {
+      logger.log(`✅ Base de datos tiene ${totalUsuarios.count} usuario(s) existente(s)`);
+    }
 
     // Reorganizar IDs para que admin sea 1 y los demás sigan secuencialmente
     // COMENTADO: La reorganización automática causa transferencia de datos entre usuarios

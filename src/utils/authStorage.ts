@@ -3,7 +3,7 @@ import { API_BASE_URL } from './apiConfig';
 const TOKEN_KEY = 'auth_token';
 const USER_KEY = 'auth_user';
 const CREDENTIALS_KEY = 'app_credentials';
-const DEFAULT_USERNAME = 'gestionapp';
+const DEFAULT_USERNAME = 'admin';
 const DEFAULT_PASSWORD = 'admin123';
 
 export interface Credentials {

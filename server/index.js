@@ -213,7 +213,8 @@ const db = new sqlite3.Database(DB_PATH, sqlite3.OPEN_READWRITE | sqlite3.OPEN_C
   if (err) {
     logger.error('❌ Error al conectar con la base de datos:', err);
     logger.error(`📁 Ruta intentada: ${DB_PATH}`);
-    process.exit(1); // Salir si no puede conectar a la BD
+    // NO salir inmediatamente - intentar continuar y mostrar error en las rutas
+    logger.error('⚠️  Continuando sin base de datos - las rutas fallarán pero el servidor seguirá corriendo');
   } else {
     logger.log('✅ Conectado a la base de datos SQLite');
     // Optimizaciones de SQLite para mejor rendimiento

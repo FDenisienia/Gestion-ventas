@@ -20,12 +20,14 @@ dotenv.config();
 // Configuración de entorno
 const IS_DEVELOPMENT = process.env.NODE_ENV !== 'production';
 
-// Logger optimizado (solo en desarrollo)
+// Logger optimizado (solo en desarrollo, pero siempre mostrar errores)
+// En Railway, mostrar logs importantes para debugging
+const isRailway = process.env.RAILWAY_ENVIRONMENT || process.env.RAILWAY_PROJECT_ID;
 const logger = {
-  log: (...args) => IS_DEVELOPMENT && console.log(...args),
-  error: (...args) => console.error(...args),
-  warn: (...args) => IS_DEVELOPMENT && console.warn(...args),
-  info: (...args) => IS_DEVELOPMENT && console.info(...args),
+  log: (...args) => (IS_DEVELOPMENT || isRailway) && console.log(...args),
+  error: (...args) => console.error(...args), // Siempre mostrar errores
+  warn: (...args) => (IS_DEVELOPMENT || isRailway) && console.warn(...args),
+  info: (...args) => (IS_DEVELOPMENT || isRailway) && console.info(...args),
 };
 
 const __filename = fileURLToPath(import.meta.url);
@@ -2224,19 +2226,30 @@ if (fs.existsSync(DIST_PATH)) {
 
 // Solo iniciar el servidor si no estamos en modo serverless (Netlify Functions)
 if (process.env.NETLIFY !== 'true' && !process.env.AWS_LAMBDA_FUNCTION_NAME) {
-  app.listen(PORT, () => {
-    logger.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+  app.listen(PORT, '0.0.0.0', () => {
+    logger.log(`🚀 Servidor corriendo en puerto ${PORT}`);
+    logger.log(`🌐 Escuchando en: http://0.0.0.0:${PORT}`);
     logger.log('🔒 Seguridad habilitada: JWT, Helmet, Rate Limiting, Validación, XSS Protection');
     logger.log(`📦 Compresión: ${IS_DEVELOPMENT ? 'Deshabilitada (desarrollo)' : 'Habilitada (producción)'}`);
     
     // Información sobre archivos estáticos
     if (fs.existsSync(DIST_PATH)) {
       logger.log('📁 Serviendo frontend desde: dist/');
-      logger.log('🌐 Abre http://localhost:' + PORT + ' en tu navegador');
     } else {
-      logger.log('⚠️  Frontend no encontrado en dist/. Ejecuta "npm run build" primero.');
-      logger.log('📡 Solo API disponible en http://localhost:' + PORT + '/api');
+      logger.log('⚠️  Frontend no encontrado en dist/. Solo API disponible.');
     }
+    
+    // Información específica de Railway
+    if (isRailway) {
+      logger.log('🚂 Railway: Servidor listo para recibir conexiones');
+      logger.log(`📊 Railway URL: ${process.env.RAILWAY_PUBLIC_DOMAIN || 'Configurar en Railway'}`);
+    }
+  }).on('error', (err) => {
+    logger.error('❌ Error al iniciar el servidor:', err);
+    if (err.code === 'EADDRINUSE') {
+      logger.error(`⚠️  Puerto ${PORT} ya está en uso`);
+    }
+    process.exit(1);
   });
 }
 

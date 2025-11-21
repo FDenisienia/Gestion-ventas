@@ -19,14 +19,16 @@ Esta guía te permitirá desplegar el backend en Railway para que **cualquier PC
 
 ### Paso 3: Configurar el Servicio
 
-Railway detectará automáticamente que es un proyecto Node.js. Si no:
+Railway detectará automáticamente que es un proyecto Node.js. **IMPORTANTE**: Configura manualmente:
 
 1. Haz clic en el servicio que se creó
-2. Ve a la pestaña **"Settings"**
+2. Ve a la pestaña **"Settings"** → **"Service"**
 3. Configura:
-   - **Root Directory**: `server`
-   - **Build Command**: `npm install` (o déjalo vacío, Railway lo detecta)
-   - **Start Command**: `npm start`
+   - **Root Directory**: `server` ⚠️ **CRÍTICO: Debe ser `server`**
+   - **Build Command**: (déjalo vacío o `npm install`)
+   - **Start Command**: `npm start` ⚠️ **Debe ser exactamente esto**
+
+**⚠️ Si no configuras el Root Directory como `server`, la app se crasheará.**
 
 ### Paso 4: Agregar Variables de Entorno
 

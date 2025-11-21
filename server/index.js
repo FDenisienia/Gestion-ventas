@@ -76,15 +76,23 @@ const getAllowedOrigins = () => {
   
   // Permitir cualquier dominio de Netlify (tanto en desarrollo como en producción)
   // Esto es necesario para que funcione desde cualquier PC/IP
+  // CRÍTICO: Esto debe estar siempre activo para que funcione desde Netlify
   origins.push(/^https:\/\/.*\.netlify\.app$/);
   origins.push(/^https:\/\/.*\.netlify\.com$/);
   
-  // En producción, también permitir cualquier origin si está configurado
-  // Esto permite acceso desde cualquier IP/PC
+  // En producción (Railway), permitir cualquier origen HTTPS por defecto
+  // Esto asegura que funcione incluso si las variables de entorno no están configuradas
+  if (isRailway || !IS_DEVELOPMENT) {
+    origins.push(/^https:\/\/.*$/); // Permitir cualquier origen HTTPS en producción
+    logger.log('CORS: Modo producción - permitiendo cualquier origen HTTPS');
+  }
+  
+  // En producción, también permitir cualquier origin si está configurado explícitamente
   if (process.env.ALLOW_ALL_ORIGINS === 'true') {
     origins.push(/^https?:\/\/.*$/); // Permitir cualquier origen HTTP/HTTPS
   }
   
+  logger.log(`CORS: Total de orígenes permitidos: ${origins.length}`);
   return origins;
 };
 

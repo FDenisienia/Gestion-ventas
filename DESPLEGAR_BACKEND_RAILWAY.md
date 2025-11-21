@@ -35,11 +35,12 @@ Railway detectará automáticamente que es un proyecto Node.js. **IMPORTANTE**: 
 
 ### Paso 4: Agregar Variables de Entorno
 
-1. En el servicio, ve a la pestaña **"Variables"**
-2. Haz clic en **"New Variable"** y agrega estas variables:
+1. En el servicio, ve a la pestaña **"Settings"** → **"Variables"**
+2. **IMPORTANTE**: Si una variable ya existe, **edítala** en lugar de crear una nueva
+3. Haz clic en **"New Variable"** para crear nuevas, o en el **lápiz (✏️)** para editar existentes
+4. Agrega o edita estas variables:
 
 ```
-PORT=3001
 NODE_ENV=production
 FRONTEND_URL=https://tu-app.netlify.app
 NETLIFY_URL=https://tu-app.netlify.app
@@ -47,6 +48,8 @@ JWT_SECRET=tu-secreto-super-seguro-cambiar-en-produccion-12345
 ```
 
 **⚠️ IMPORTANTE:**
+- **NO agregues `PORT`** - Railway lo asigna automáticamente
+- Si una variable ya existe, **edítala** (haz clic en el lápiz ✏️)
 - Reemplaza `https://tu-app.netlify.app` con la URL real de tu app en Netlify
 - Cambia `JWT_SECRET` por un secreto seguro (puede ser cualquier string largo y aleatorio)
 

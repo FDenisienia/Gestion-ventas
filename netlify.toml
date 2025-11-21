@@ -12,22 +12,23 @@
     NETLIFY = "true"
 
 # Configuración de funciones
-[functions]
-  # Directorio de funciones
-  directory = "netlify/functions"
-  # Node.js runtime
-  node_bundler = "esbuild"
-  # Incluir archivos del servidor
-  included_files = ["server/**"]
+# DESHABILITADO: El backend está en Railway, no necesitamos Netlify Functions
+# [functions]
+#   # Directorio de funciones
+#   directory = "netlify/functions"
+#   # Node.js runtime
+#   node_bundler = "esbuild"
+#   # Incluir archivos del servidor
+#   included_files = ["server/**"]
 
 # Redirecciones para SPA (Single Page Application)
-# Las rutas de API van a Netlify Functions, el resto al frontend
-# Usar :splat para capturar toda la ruta después de /api
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/api/:splat"
-  status = 200
-  force = true
+# NOTA: Las rutas de API ahora van a Railway (configurado en VITE_API_URL)
+# No necesitamos redirigir /api/* porque el frontend usa VITE_API_URL directamente
+# [[redirects]]
+#   from = "/api/*"
+#   to = "/.netlify/functions/api/:splat"
+#   status = 200
+#   force = true
 
 [[redirects]]
   from = "/*"

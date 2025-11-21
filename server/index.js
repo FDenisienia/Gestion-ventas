@@ -94,31 +94,43 @@ const corsOptions = {
     
     // Permitir requests sin origin (mobile apps, Postman, etc.)
     if (!origin) {
+      logger.log('CORS: Request sin origin, permitiendo');
       return callback(null, true);
     }
+    
+    // Log para debugging
+    logger.log(`CORS: Verificando origin: ${origin}`);
+    logger.log(`CORS: Orígenes permitidos: ${allowedOrigins.length}`);
     
     // Verificar si el origin está permitido
     const isAllowed = allowedOrigins.some(allowedOrigin => {
       if (typeof allowedOrigin === 'string') {
-        return origin === allowedOrigin;
+        const matches = origin === allowedOrigin;
+        if (matches) logger.log(`CORS: Match exacto con: ${allowedOrigin}`);
+        return matches;
       }
       if (allowedOrigin instanceof RegExp) {
-        return allowedOrigin.test(origin);
+        const matches = allowedOrigin.test(origin);
+        if (matches) logger.log(`CORS: Match con regex: ${allowedOrigin}`);
+        return matches;
       }
       return false;
     });
     
     if (isAllowed) {
+      logger.log(`CORS: Origin permitido: ${origin}`);
       callback(null, true);
     } else {
-      logger.warn(`CORS bloqueado para origin: ${origin}`);
+      logger.warn(`CORS: Origin bloqueado: ${origin}`);
+      logger.warn(`CORS: Orígenes permitidos:`, allowedOrigins);
       callback(new Error('No permitido por CORS'));
     }
   },
   credentials: true,
   optionsSuccessStatus: 200,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  exposedHeaders: ['Content-Length', 'Content-Type'],
 };
 app.use(cors(corsOptions));
 

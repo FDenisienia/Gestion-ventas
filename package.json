@@ -1,0 +1,38 @@
+{
+  "name": "tasta",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "prebuild": "node scripts/pre-build.js",
+    "build": "tsc && vite build",
+    "postbuild": "node scripts/post-build.js",
+    "preview": "vite preview",
+    "start:backend": "cd server && npm start",
+    "start:frontend": "npm run dev",
+    "start:all": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "build:start": "npm run build && npm run start:backend",
+    "start": "npm run start:backend",
+    "serve": "npm run start:backend",
+    "production": "npm run build && npm run start:backend",
+    "clean": "node scripts/clean.js",
+    "netlify:build": "npm run build"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.1.1",
+    "typescript": "~5.9.3",
+    "vite": "^7.2.2"
+  },
+  "dependencies": {
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "bootstrap": "^5.3.8",
+    "jspdf": "^3.0.3",
+    "jspdf-autotable": "^5.0.2",
+    "react": "^19.2.0",
+    "react-bootstrap": "^2.10.10",
+    "react-dom": "^19.2.0",
+    "recharts": "^3.4.1"
+  }
+}

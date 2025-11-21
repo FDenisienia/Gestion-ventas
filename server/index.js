@@ -2219,6 +2219,28 @@ app.get('/api/rutas', (req, res) => {
   res.json({ rutas, total: rutas.length });
 });
 
+// Ruta raíz - información del servidor
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Servidor de Gestión de Ventas',
+    version: '1.0.0',
+    status: 'running',
+    api: '/api',
+    rutas: '/api/rutas',
+    documentacion: 'Visita GET /api/rutas para ver todas las rutas disponibles'
+  });
+});
+
+// Ruta de health check
+app.get('/health', (req, res) => {
+  res.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    environment: IS_DEVELOPMENT ? 'development' : 'production'
+  });
+});
+
 // Ruta no encontrada para API
 app.use('/api/*', (req, res) => {
   logger.log(`⚠️  Ruta no encontrada: ${req.method} ${req.path}`);

@@ -162,8 +162,11 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // ========== CONFIGURACIÓN DE BASE DE DATOS ==========
 
 // En Netlify Functions, usar /tmp para la base de datos (único directorio escribible)
+// En Railway, usar el directorio del proyecto (persistente)
 // En desarrollo/producción normal, usar el directorio del servidor
 const isNetlifyFunction = process.env.NETLIFY === 'true' || process.env.AWS_LAMBDA_FUNCTION_NAME;
+const isRailway = process.env.RAILWAY_ENVIRONMENT || process.env.RAILWAY_PROJECT_ID;
+
 const DB_PATH = isNetlifyFunction 
   ? path.join('/tmp', 'database.db')
   : path.join(__dirname, 'database.db');
@@ -171,17 +174,29 @@ const BACKUP_DIR = isNetlifyFunction
   ? path.join('/tmp', 'backups')
   : path.join(__dirname, 'backups');
 
+// Logs de inicio para debugging
+logger.log(`🔧 Iniciando servidor...`);
+logger.log(`📁 Ruta de base de datos: ${DB_PATH}`);
+logger.log(`📁 Directorio de backups: ${BACKUP_DIR}`);
+logger.log(`🌐 Puerto: ${PORT}`);
+logger.log(`🔐 Entorno: ${IS_DEVELOPMENT ? 'Desarrollo' : 'Producción'}`);
+if (isRailway) logger.log(`🚂 Detectado Railway`);
+if (isNetlifyFunction) logger.log(`☁️  Modo Netlify Function`);
+
 // Asegurar que el directorio de backups existe
 if (!fs.existsSync(BACKUP_DIR)) {
   fs.mkdirSync(BACKUP_DIR, { recursive: true });
+  logger.log(`📁 Directorio de backups creado: ${BACKUP_DIR}`);
 }
 
 // Crear conexión a la base de datos con optimizaciones
 const db = new sqlite3.Database(DB_PATH, sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
   if (err) {
-    logger.error('Error al conectar con la base de datos:', err);
+    logger.error('❌ Error al conectar con la base de datos:', err);
+    logger.error(`📁 Ruta intentada: ${DB_PATH}`);
+    process.exit(1); // Salir si no puede conectar a la BD
   } else {
-    logger.log('Conectado a la base de datos SQLite');
+    logger.log('✅ Conectado a la base de datos SQLite');
     // Optimizaciones de SQLite para mejor rendimiento
     db.run('PRAGMA journal_mode = WAL', (err) => {
       if (err) logger.error('Error al configurar WAL:', err);

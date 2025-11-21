@@ -165,7 +165,6 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // En Railway, usar el directorio del proyecto (persistente)
 // En desarrollo/producción normal, usar el directorio del servidor
 const isNetlifyFunction = process.env.NETLIFY === 'true' || process.env.AWS_LAMBDA_FUNCTION_NAME;
-const isRailway = process.env.RAILWAY_ENVIRONMENT || process.env.RAILWAY_PROJECT_ID;
 
 const DB_PATH = isNetlifyFunction 
   ? path.join('/tmp', 'database.db')

@@ -25,10 +25,13 @@ Railway detectará automáticamente que es un proyecto Node.js. **IMPORTANTE**: 
 2. Ve a la pestaña **"Settings"** → **"Service"**
 3. Configura:
    - **Root Directory**: `server` ⚠️ **CRÍTICO: Debe ser `server`**
-   - **Build Command**: (déjalo vacío o `npm install`)
+   - **Build Command**: `npm install` ⚠️ **IMPORTANTE: Debe instalar dependencias**
    - **Start Command**: `npm start` ⚠️ **Debe ser exactamente esto**
 
-**⚠️ Si no configuras el Root Directory como `server`, la app se crasheará.**
+**⚠️ CRÍTICO:**
+- Si no configuras el Root Directory como `server`, la app se crasheará
+- Si no configuras el Build Command como `npm install`, faltarán las dependencias
+- Railway necesita instalar las dependencias antes de ejecutar el servidor
 
 ### Paso 4: Agregar Variables de Entorno
 

@@ -125,7 +125,7 @@ Este proyecto está diseñado para desplegarse en:
 3. **Configurar el build**
    - **Base directory**: `frontend`
    - **Build command**: `npm install && npm run build`
-   - **Publish directory**: `frontend/dist`
+   - **Publish directory**: `dist` (⚠️ IMPORTANTE: Solo `dist`, no `frontend/dist` porque el base directory ya es `frontend`)
 
 4. **Configurar variables de entorno**
    - Ve a "Site settings" → "Environment variables"

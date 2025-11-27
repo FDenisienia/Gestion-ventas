@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "$2b$10$eWxjORk.4TX4LZn9oDrS7eHWa30990iAAV1rgvGMWYjsTk05npzIG",
+      "role": "admin",
+      "nombre": "Administrador",
+      "email": "admin@example.com",
+      "fecha_creacion": "2025-11-27T16:38:00.054Z"
+    },
+    {
+      "id": 2,
+      "username": "meta",
+      "password": "$2b$10$3ySXGpekFR8XzXMt5xn9u.DOdQ.oXhzDzThRzZ.G48Qq40AzIDi9O",
+      "role": "user",
+      "nombre": "jero",
+      "email": "jero@gmail.com",
+      "fecha_creacion": "2025-11-27T19:27:17.641Z"
+    }
+  ]
+}

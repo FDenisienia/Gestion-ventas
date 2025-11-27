@@ -1,0 +1,100 @@
+{
+  "clientes": [
+    {
+      "id": 1,
+      "nombre": "Jero",
+      "dni": "123456",
+      "telefono": "13245",
+      "fecha_creacion": "2025-11-27T19:35:02.187Z"
+    }
+  ],
+  "ventas": [
+    {
+      "id": 1,
+      "cliente_id": 1,
+      "items": [
+        {
+          "articulo_id": 1,
+          "nombre": "Strawberry Ice",
+          "marca": "Ignite 40k",
+          "producto": "Strawberry Ice",
+          "categoria": "Electrónica",
+          "cantidad": 5,
+          "precio": 20,
+          "costo_unit": 15,
+          "precio_venta": 20,
+          "descuento": 0,
+          "impuestos": 0,
+          "total": 100
+        },
+        {
+          "articulo_id": 1,
+          "nombre": "Strawberry Ice",
+          "marca": "Ignite 40k",
+          "producto": "Strawberry Ice",
+          "categoria": "Electrónica",
+          "cantidad": 1,
+          "precio": 20,
+          "costo_unit": 15,
+          "precio_venta": 20,
+          "descuento": 0,
+          "impuestos": 0,
+          "total": 20
+        }
+      ],
+      "categoria_venta_id": null,
+      "fecha_emision": "2025-11-27",
+      "fecha_vencimiento": "2025-11-27",
+      "descuento_porcentaje": 0,
+      "descuento_monto": 0,
+      "subtotal": 120,
+      "total_neto": 120,
+      "total_venta": 120,
+      "nota_cliente": "",
+      "tipo": "venta",
+      "estado": "pendiente",
+      "moneda": "USD",
+      "metodo_pago": "transferencia",
+      "cuenta_transferencia": "1",
+      "estado_pago": "pagado",
+      "pendiente": 0,
+      "fecha_venta": "2025-11-27T19:37:23.780Z",
+      "descripcion": "Strawberry Ice, Strawberry Ice",
+      "monto": 120
+    }
+  ],
+  "egresos": [
+    {
+      "id": 1,
+      "descripcion": "cinta embalaje",
+      "monto": 2,
+      "moneda": "USD",
+      "metodo_pago": "transferencia",
+      "cuenta_transferencia": "1",
+      "categoria": "",
+      "fecha": "2025-11-27",
+      "fecha_creacion": "2025-11-27T19:47:31.660Z"
+    }
+  ],
+  "articulos": [
+    {
+      "id": 1,
+      "marca": "Ignite 40k",
+      "nombre": "Strawberry Ice",
+      "costo": 15,
+      "venta": 20,
+      "stock": 19,
+      "categoria_id": 1,
+      "moneda": "USD",
+      "fecha_creacion": "2025-11-27T19:35:42.525Z"
+    }
+  ],
+  "categorias": [
+    {
+      "id": 1,
+      "nombre": "Electrónica",
+      "fecha_creacion": "2025-11-27T19:35:24.630Z"
+    }
+  ],
+  "categoriasVenta": []
+}

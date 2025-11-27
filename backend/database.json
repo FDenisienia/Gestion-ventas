@@ -1,0 +1,158 @@
+{
+  "clientes": [
+    {
+      "id": 1,
+      "nombre": "Federico Denisienia",
+      "dni": "40895533",
+      "telefono": "2216301582",
+      "fecha_creacion": "2025-11-27T12:41:59.630Z"
+    }
+  ],
+  "ventas": [
+    {
+      "id": 1,
+      "cliente_id": 1,
+      "items": [
+        {
+          "articulo_id": 2,
+          "nombre": "Sauvage",
+          "marca": "Dior",
+          "producto": "Sauvage",
+          "categoria": "",
+          "cantidad": 1,
+          "precio": 5000,
+          "costo_unit": 2500,
+          "precio_venta": 5000,
+          "descuento": 0,
+          "impuestos": 0,
+          "total": 5000
+        },
+        {
+          "articulo_id": 1,
+          "nombre": "Strawberry Ice",
+          "marca": "Ignite 40K",
+          "producto": "Strawberry Ice",
+          "categoria": "",
+          "cantidad": 15,
+          "precio": 1500,
+          "costo_unit": 1000,
+          "precio_venta": 1500,
+          "descuento": 0,
+          "impuestos": 0,
+          "total": 22500
+        }
+      ],
+      "categoria_venta_id": null,
+      "fecha_emision": "2025-11-27",
+      "fecha_vencimiento": "2025-11-27",
+      "descuento_porcentaje": 0,
+      "descuento_monto": 0,
+      "subtotal": 27500,
+      "total_neto": 27500,
+      "total_venta": 27500,
+      "nota_cliente": "",
+      "tipo": "venta",
+      "estado": "pendiente",
+      "moneda": "USD",
+      "metodo_pago": "efectivo",
+      "estado_pago": "pagado",
+      "pendiente": 0,
+      "fecha_venta": "2025-11-27T15:00:44.555Z",
+      "descripcion": "Sauvage, Strawberry Ice",
+      "monto": 27500,
+      "cuenta_transferencia": ""
+    },
+    {
+      "id": 2,
+      "cliente_id": 1,
+      "items": [
+        {
+          "articulo_id": 2,
+          "nombre": "Sauvage",
+          "marca": "Dior",
+          "producto": "Sauvage",
+          "categoria": "",
+          "cantidad": 1,
+          "precio": 5000,
+          "costo_unit": 2500,
+          "precio_venta": 5000,
+          "descuento": 0,
+          "impuestos": 0,
+          "total": 5000
+        }
+      ],
+      "categoria_venta_id": null,
+      "fecha_emision": "2025-11-27",
+      "fecha_vencimiento": "2025-11-27",
+      "descuento_porcentaje": 0,
+      "descuento_monto": 0,
+      "subtotal": 5000,
+      "total_neto": 5000,
+      "total_venta": 5000,
+      "tipo": "venta",
+      "moneda": "USD",
+      "metodo_pago": "transferencia",
+      "cuenta_transferencia": "Mercado Pago 1",
+      "estado_pago": "pagado",
+      "pendiente": 0,
+      "fecha_venta": "2025-11-27T15:10:31.191Z",
+      "descripcion": "Sauvage",
+      "monto": 5000,
+      "nota_cliente": ""
+    }
+  ],
+  "articulos": [
+    {
+      "id": 1,
+      "marca": "Ignite 40K",
+      "nombre": "Strawberry Ice",
+      "costo": 1000,
+      "venta": 1500,
+      "stock": 35,
+      "categoria_id": 2,
+      "fecha_creacion": "2025-11-27T12:59:29.243Z",
+      "moneda": "USD"
+    },
+    {
+      "id": 2,
+      "marca": "Dior",
+      "nombre": "Sauvage",
+      "costo": 2500,
+      "venta": 5000,
+      "stock": 48,
+      "categoria_id": 1,
+      "fecha_creacion": "2025-11-27T12:59:44.810Z",
+      "moneda": "USD"
+    }
+  ],
+  "categorias": [
+    {
+      "id": 1,
+      "nombre": "Perfuimería",
+      "fecha_creacion": "2025-11-27T12:58:43.774Z"
+    },
+    {
+      "id": 2,
+      "nombre": "Electrónica",
+      "fecha_creacion": "2025-11-27T12:58:59.134Z"
+    }
+  ],
+  "categoriasVenta": [
+    {
+      "id": 1,
+      "nombre": "Minorista",
+      "fecha_creacion": "2025-11-27T13:03:41.871Z"
+    },
+    {
+      "id": 2,
+      "nombre": "Mayorita",
+      "fecha_creacion": "2025-11-27T13:03:47.094Z"
+    },
+    {
+      "id": 3,
+      "nombre": "Online",
+      "fecha_creacion": "2025-11-27T13:03:50.345Z"
+    }
+  ],
+  "egresos": []
+}

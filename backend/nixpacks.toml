@@ -8,5 +8,5 @@ cmds = ["npm install"]
 cmds = ["echo 'Build complete'"]
 
 [start]
-cmd = "node server.js"
+cmd = "npm start"
 

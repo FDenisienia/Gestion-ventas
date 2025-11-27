@@ -12,9 +12,21 @@ import categoriasVentaRouter from './routes/categoriasVenta.js'
 import './database.js'
 
 const app = express()
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 
-app.use(cors())
+// Configurar CORS
+const corsOptions = {
+  origin: [
+    'http://localhost:3000', // Desarrollo local
+    process.env.FRONTEND_URL, // URL de producción desde variable de entorno
+    /\.netlify\.app$/, // Todos los dominios de Netlify
+  ].filter(Boolean), // Elimina valores undefined
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}
+
+app.use(cors(corsOptions))
 app.use(express.json())
 
 // Rutas públicas
@@ -52,8 +64,11 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: err.message || 'Error interno del servidor' })
 })
 
-app.listen(PORT, () => {
-  console.log(`Servidor backend corriendo en http://localhost:${PORT}`)
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Servidor backend corriendo en puerto ${PORT}`)
   console.log('Base de datos inicializada correctamente')
+  if (process.env.NODE_ENV === 'production') {
+    console.log('Modo producción activado')
+  }
 })
 

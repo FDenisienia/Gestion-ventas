@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react'
+import { getApiUrl } from '../config'
 
 const AuthContext = createContext(null)
 
@@ -21,7 +22,7 @@ export function AuthProvider({ children }) {
       }
 
       try {
-        const response = await fetch('/api/auth/verify', {
+        const response = await fetch(getApiUrl('/api/auth/verify'), {
           headers: {
             'Authorization': `Bearer ${storedToken}`
           }
@@ -62,7 +63,7 @@ export function AuthProvider({ children }) {
 
   const login = useCallback(async (username, password) => {
     try {
-      const response = await fetch('/api/auth/login', {
+      const response = await fetch(getApiUrl('/api/auth/login'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

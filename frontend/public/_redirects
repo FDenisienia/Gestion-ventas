@@ -1,0 +1,6 @@
+# Netlify redirects file
+# Esto permite que React Router funcione correctamente en Netlify
+# Todas las rutas que no sean archivos estáticos se redirigen a index.html
+
+/*    /index.html   200
+
